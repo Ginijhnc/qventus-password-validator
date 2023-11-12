@@ -1,6 +1,6 @@
 import styles from "./PasswordInput.module.css";
 import React, { useState } from "react";
-import { PasswordRequirements } from "@/requirements/PasswordRequirements";
+import { PasswordRequirement } from "@/requirements/PasswordRequirements";
 
 type RequirementProps = {
   description: string;
@@ -23,7 +23,11 @@ const Requirement = ({ description, isValid }: RequirementProps) => {
   );
 };
 
-export const PasswordInput = () => {
+type PasswordInputProps = {
+  requirements: PasswordRequirement[];
+};
+
+export const PasswordInput = ({ requirements }: PasswordInputProps) => {
   const [password, setPassword] = useState<string>("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,9 +47,9 @@ export const PasswordInput = () => {
         />
       </div>
       <ul className={styles.requirementsContainer}>
-        {PasswordRequirements.map((req) => (
+        {requirements.map((req) => (
           <Requirement
-            key={req.id}
+            key={req.name}
             description={req.description}
             isValid={req.check(password)}
           />

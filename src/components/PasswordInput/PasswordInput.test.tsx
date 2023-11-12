@@ -1,13 +1,22 @@
 import { describe, it, expect } from "vitest";
 import { render, fireEvent, screen } from "@testing-library/react";
 import { PasswordInput } from "./PasswordInput";
+import { reqs } from "@/requirements/PasswordRequirements";
 
 const testRequirement = (
   inputValue: string,
   description: string,
   expectedIndicator: string
 ) => {
-  render(<PasswordInput />);
+  render(
+    <PasswordInput
+      requirements={[
+        reqs.hasSpecialChar,
+        reqs.hasNumber,
+        reqs.hasUppercaseLetter,
+      ]}
+    />
+  );
   const input = screen.getByTestId("password-input");
   fireEvent.change(input, { target: { value: inputValue } });
 
@@ -37,6 +46,6 @@ describe("PasswordInput regex validation tests", () => {
   });
 
   it("should render an X if the password doesnt contain an uppercase letter", () => {
-    testRequirement("justapassword", "Has an uppercase letter", "X");
+    testRequirement("justapasword", "Has an uppercase letter", "X");
   });
 });
