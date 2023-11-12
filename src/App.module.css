@@ -1,0 +1,26 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  --success-color: hsl(114deg, 91%, 37%);
+  --error-color: hsl(3deg, 90%, 41%);
+}
+
+body {
+  color: hsl(0deg, 0%, 100%);
+  background-color: hsl(0deg, 0%, 14%);
+}
