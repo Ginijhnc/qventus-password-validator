@@ -1,27 +1,7 @@
 import styles from "./PasswordInput.module.css";
 import React, { useState } from "react";
 import { PasswordRequirement } from "@/requirements/PasswordRequirements";
-
-type RequirementProps = {
-  description: string;
-  isValid: boolean;
-};
-
-const Requirement = ({ description, isValid }: RequirementProps) => {
-  const indicatorStatus = isValid ? styles.success : styles.error;
-
-  return (
-    <li className={styles.requirement}>
-      <span
-        data-testid={`validation-${description}`}
-        className={`${styles.requirementIndicator} ${indicatorStatus}`}
-      >
-        {isValid ? "✔" : "X"}
-      </span>
-      <span>{description}</span>
-    </li>
-  );
-};
+import { Requirement } from "@/components/Requirement";
 
 type PasswordInputProps = {
   requirements: PasswordRequirement[];

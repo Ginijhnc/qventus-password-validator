@@ -46,6 +46,6 @@ describe("PasswordInput regex validation tests", () => {
   });
 
   it("should render an X if the password doesnt contain an uppercase letter", () => {
-    testRequirement("justapasword", "Has an uppercase letter", "X");
+    testRequirement("justapassword", "Has an uppercase letter", "X");
   });
 });
