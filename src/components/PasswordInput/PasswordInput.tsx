@@ -5,7 +5,7 @@ import { PasswordRequirement } from "@/requirements/PasswordRequirements";
 import { Requirement } from "@/components/Requirement";
 
 type PasswordInputProps = {
-  requirements: PasswordRequirement[];
+  requirements: [PasswordRequirement, ...PasswordRequirement[]];
 };
 
 export const debounceDelay = 300;
