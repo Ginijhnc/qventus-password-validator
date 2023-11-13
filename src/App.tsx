@@ -12,6 +12,7 @@ export const App = () => {
           reqs.hasSpecialChar,
           reqs.hasNumber,
           reqs.hasUppercaseLetter,
+          reqs.hasNoConsecutiveLetters,
         ]}
       />
     </main>

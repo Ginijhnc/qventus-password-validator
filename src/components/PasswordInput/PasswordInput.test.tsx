@@ -14,6 +14,7 @@ const testRequirement = async (
         reqs.hasSpecialChar,
         reqs.hasNumber,
         reqs.hasUppercaseLetter,
+        reqs.hasNoConsecutiveLetters,
       ]}
     />
   );
@@ -54,5 +55,17 @@ describe("PasswordInput regex validation tests", () => {
 
   it("should render an X if the password doesnt contain an uppercase letter", async () => {
     await testRequirement("justapassword", "Has an uppercase letter", "X");
+  });
+
+  it("should render a ✔ if the password doesnt contain consecutive letters", async () => {
+    await testRequirement("p4s0r6d", "Has no consecutive letters", "✔");
+  });
+
+  it("should render an X if the password contains consecutive letters", async () => {
+    await testRequirement("p4ss0r6d", "Has no consecutive letters", "X");
+  });
+
+  it("should render an X if the password contains consecutive letters, even if they are not the same letter", async () => {
+    await testRequirement("p4sw0r6d", "Has no consecutive letters", "X");
   });
 });

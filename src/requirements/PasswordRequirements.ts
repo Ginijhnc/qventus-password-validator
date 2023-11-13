@@ -1,3 +1,5 @@
+import { validateNoConsecutiveLetters } from "@/utils/functions";
+
 export type PasswordRequirement = {
   name: string;
   description: string;
@@ -22,8 +24,15 @@ const hasUppercaseLetter: PasswordRequirement = {
   check: (password: string) => /[A-Z]/.test(password),
 };
 
+const hasNoConsecutiveLetters: PasswordRequirement = {
+  name: "hasNoConsecutiveLetters",
+  description: "Has no consecutive letters",
+  check: validateNoConsecutiveLetters,
+};
+
 export const reqs = {
   hasSpecialChar,
   hasNumber,
   hasUppercaseLetter,
+  hasNoConsecutiveLetters,
 } as const;
