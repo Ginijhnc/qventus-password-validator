@@ -1,5 +1,6 @@
 import styles from "./PasswordInput.module.css";
 import React, { useState } from "react";
+import { useDebounce } from "@/hooks/useDebounce";
 import { PasswordRequirement } from "@/requirements/PasswordRequirements";
 import { Requirement } from "@/components/Requirement";
 
@@ -7,8 +8,11 @@ type PasswordInputProps = {
   requirements: PasswordRequirement[];
 };
 
+export const debounceDelay = 300;
+
 export const PasswordInput = ({ requirements }: PasswordInputProps) => {
   const [password, setPassword] = useState<string>("");
+  const debouncedPassword = useDebounce(password, debounceDelay);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
@@ -31,7 +35,7 @@ export const PasswordInput = ({ requirements }: PasswordInputProps) => {
           <Requirement
             key={req.name}
             description={req.description}
-            isValid={req.check(password)}
+            isValid={debouncedPassword ? req.check(debouncedPassword) : false}
           />
         ))}
       </ul>
