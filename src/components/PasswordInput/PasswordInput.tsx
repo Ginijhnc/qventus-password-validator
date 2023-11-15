@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useDebounce } from "@/hooks/useDebounce";
 import { PasswordRequirement } from "@/requirements/PasswordRequirements";
 import { Requirement } from "@/components/Requirement";
+import { EyeIcon } from "@/components/Icons/EyeIcon";
 
 type PasswordInputProps = {
   requirements: [PasswordRequirement, ...PasswordRequirement[]];
@@ -12,10 +13,15 @@ export const debounceDelay = 300;
 
 export const PasswordInput = ({ requirements }: PasswordInputProps) => {
   const [password, setPassword] = useState<string>("");
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const debouncedPassword = useDebounce(password, debounceDelay);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -27,8 +33,14 @@ export const PasswordInput = ({ requirements }: PasswordInputProps) => {
           className={styles.input}
           value={password}
           onChange={handleChange}
-          // type='password'
+          type={showPassword ? "text" : "password"}
         />
+        <button
+          className={styles.togglePasswordVisibility}
+          onClick={togglePasswordVisibility}
+        >
+          <EyeIcon />
+        </button>
       </div>
       <ul className={styles.requirementsContainer}>
         {requirements.map((req) => (
